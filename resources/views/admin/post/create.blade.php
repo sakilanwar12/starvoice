@@ -8,16 +8,21 @@
                 </div>
                 <div class="space-y-5">
                     <div class="p-10">
-                        <form action="/submit" method="POST" class="space-y-4">
+                        <form action="{{ route('admin.post.store') }}" method="POST" class="space-y-4">
                             @csrf
-
                             <div>
                                 <x-form.label for="title">Post Title</x-form.label>
                                 <x-form.input type="text" name="title" placeholder="Enter post title" />
+                                @error('title')
+                                    <x-ui.alert type="danger">{{ $message }}</x-ui.alert>
+                                @enderror
                             </div>
                             <div>
                                 <x-form.label for="post_content">Post Content</x-form.label>
-                                <x-form.textarea name="post_content" placeholder="Enter post content" />
+                                <x-form.textarea name="body" placeholder="Enter post content" />
+                                @error('body')
+                                    <x-ui.alert type="danger">{{ $message }}</x-ui.alert>
+                                @enderror
                             </div>
 
                             <x-ui.button type="submit">Submit</x-ui.button>
